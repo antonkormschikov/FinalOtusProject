@@ -12,9 +12,9 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <webdriver.manager.version>5.5.3</webdriver.manager.version>
+        <webdriver.manager.version>5.6.2</webdriver.manager.version>
         <selenium.java.version>4.13.0</selenium.java.version>
-        <junit.version>5.10.0</junit.version>
+        <junit.version>5.10.1</junit.version>
         <browser>chrome</browser>
         <base.url>https://otus.ru</base.url>
         <log4j-core.version>2.16.0</log4j-core.version>
@@ -64,7 +64,7 @@
                 <configuration>
                     <source>${maven.compiler.source}</source>
                     <target>${maven.compiler.target}</target>
-                    <showDeprecation>true</showDeprecation>
+                    <showDeprecation>false</showDeprecation>
                 </configuration>
             </plugin>
             <plugin>

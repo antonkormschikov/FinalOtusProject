@@ -5,7 +5,11 @@ import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.List;
 
 public class CatalogPage extends AbsPage {
@@ -14,24 +18,24 @@ public class CatalogPage extends AbsPage {
     }
 
     public void openTestingCoursePage(){
-       WebElement element= driver.findElement(By.xpath("//section/div/div/div[text()='Тестирование']"));
-       waiters.waitElementVisible(element);
-       element.click();
+    WebElement element = driver.findElement(By.xpath("//section/div/div/div[text()='Тестирование']"));
+    new Actions(driver).moveToElement(element).build().perform();
+    element.click();
+
     }
 
     public List getCourses(){
-        List<WebElement> elements = driver.findElements(By.xpath("//main/div/section/div/div/a"));
-        for (WebElement element : elements) {
-            System.out.println(element.getAttribute("href").toString());
-
-        }
-
-        return elements;
+     //   WebElement element =driver.findElement(By.xpath("//h1/div[text()='Каталог']"));
+       // new WebDriverWait(driver,Duration.ofSeconds(5)).until(ExpectedConditions.visibilityOf(element));
+        return driver.findElements(By.xpath("//main/div/section/div/div/a"));
     }
 
-    public void assertCountCourses(int coursesCount,List coursesList){
-        Assertions.assertEquals(coursesCount,coursesList.size());
+    public void assertCountCourses(int countCourses){
+
+        Assertions.assertEquals(countCourses,getCourses().size());
     }
+
+
 
 
 }

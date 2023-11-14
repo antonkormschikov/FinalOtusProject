@@ -9,6 +9,8 @@ import org.openqa.selenium.WebDriver;
 import pages.CatalogPage;
 import waiters.Waiters;
 
+import java.time.Duration;
+
 public class TestingCoursesCatalog_Test {
     private static final Logger logger = (Logger) LogManager.getLogger(TestingCoursesCatalog_Test.class);
 
@@ -18,7 +20,7 @@ public class TestingCoursesCatalog_Test {
     @BeforeAll
     public static void manager(){
 
-        //WebDriverManager.chromedriver().setup();
+        WebDriverManager.chromedriver().setup();
         WebDriverManager.firefoxdriver().setup();
     }
     @BeforeEach
@@ -30,17 +32,25 @@ public class TestingCoursesCatalog_Test {
     @AfterEach
     public void close(){
         if (driver != null) {
-            //   driver.close();
+               driver.close();
             driver.quit();
         }
     }
     @Test
-    public void checkCountTestingCourses(){
+    public void CountTestingCoursesTest(){
         CatalogPage catalogPage = new CatalogPage(driver);
-        catalogPage.openPage("/");
-        catalogPage.openTestingCoursePage();
-        catalogPage.assertCountCourses(10, catalogPage.getCourses());
+        catalogPage.openPage("/catalog/courses?categories=testing");
+       // catalogPage.openTestingCoursePage();
+
+        catalogPage.assertCountCourses(10);
+    }
+    @Test
+    public void courseCardTest(){
+        CatalogPage catalogPage = new CatalogPage(driver);
+        catalogPage.openPage("/catalog/courses?categories=testing");
+
 
     }
+
 
 }
