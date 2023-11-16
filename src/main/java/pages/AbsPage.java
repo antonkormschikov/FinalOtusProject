@@ -17,8 +17,9 @@ public class AbsPage extends AbsPageObject {
     }
 
     private final String BASE_URL = System.getProperty("base.url", "https://otus.ru");
-    public static final Logger logger = (Logger) LogManager.getLogger();
+    public static final Logger logger = (Logger) LogManager.getLogger(AbsPage.class);
     public void openPage(String path) {
+        logger.info(String.format("Переход на страницу %s",path));
         driver.get(BASE_URL + path);
     }
 

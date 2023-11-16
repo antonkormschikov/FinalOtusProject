@@ -11,7 +11,7 @@ import waiters.Waiters;
 
 
 public class TestingCoursesCatalog_Test {
-    public Logger logger = (Logger) LogManager.getLogger(TestingCoursesCatalog_Test.class);
+    private Logger logger = (Logger) LogManager.getLogger(TestingCoursesCatalog_Test.class);
 
     private WebDriver driver;
     private Waiters waiters;
@@ -47,8 +47,8 @@ public class TestingCoursesCatalog_Test {
     @Test
     public void courseCardTest(){logger.info("----Тест Валидация информации в карточке курса---");
         CatalogPage catalogPage = new CatalogPage(driver);
-        catalogPage.openPage("/catalog/courses?categories=testing");logger.info("1. Переход на страницу курсов тестирования");
-        new CourcePage(driver).assertCorrectCoursesDataInfo();logger.info("2. Валидация информации в карточке курса");
+        catalogPage.openPage("/catalog/courses?categories=testing");
+        new CourcePage(driver).assertCorrectCoursesDataInfo();
     }
     @Disabled
     @Test

@@ -21,7 +21,7 @@ import java.util.List;
 
 public class CalendarPage extends AbsPage{
     public CalendarPage (WebDriver driver) {super(driver);}
- //   private static final Logger logger = (Logger) LogManager.getLogger(CalendarPage.class);
+    private static final Logger logger = (Logger) LogManager.getLogger(CalendarPage.class);
     private final String eventLocator="//a[@class='dod_new-event']";
     private final String dateLocatorTemplate="//a[@href='%s' and @class='dod_new-event']/div/div[@class='dod_new-event__bottom']/div/span[1]/span[@class='dod_new-event__date-text']";
     private final String formatLocatorTemplate="//a[@href='%s' and @class='dod_new-event']//div[@class='dod_new-type__text']";

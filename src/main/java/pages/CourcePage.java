@@ -17,13 +17,14 @@ import pages.CatalogPage;
 
 public class CourcePage extends AbsPage{
     public CourcePage (WebDriver driver){super(driver);}
- //   private static final  Logger logger = (Logger) LogManager.getLogger(CourcePage.class);
+    private static final  Logger logger = (Logger) LogManager.getLogger(CourcePage.class);
     private final String sourceNameLocator = "//h1";
     private final String courseDescriptionLocator="//h1/following::div[1]";
     private final String courseDuration="//main/div/section/div/div/div[3]/p";
     private final String courseFormat="//main/div/section/div/div/div[4]/p";
 
-    public void checkCard(){
+    public void checkCard(String href){
+        logger.info(String.format("Валидация карточки %s",href));
         Assertions.assertTrue(driver.findElement(By.xpath(sourceNameLocator)).isDisplayed()
                                     &&driver.findElement(By.xpath(sourceNameLocator)).getText().length()>0,
                 "sourceName is correct");
@@ -40,6 +41,7 @@ public class CourcePage extends AbsPage{
     }
 
     public void assertCorrectCoursesDataInfo(){
+        logger.info("Выбор карточек курсов для валидации");
         String link="";
         List<String>  hrefs  = new ArrayList<>();
         List<WebElement> coursesList = new CatalogPage(driver).getCourses();
@@ -51,13 +53,14 @@ public class CourcePage extends AbsPage{
         for (String href:hrefs) {
             driver.get(href);
             try {
-                checkCard();
+                checkCard(href);
                 i++;
-            } catch (Exception ex){
-                allExeption+='\n' +(String.format("Ошибка на странице %d %s",i,href) + ' '+  ex.toString());
-                System.out.println(String.format("Ошибка на странице %d %s",i,href) + ' '+  ex.toString());
+            } catch (Exception ex) {
+                allExeption += '\n' + (String.format("Ошибка на странице %d %s", i, href) + ' ' + ex.toString());
+
             }
-          //  if (allExeption.length()>0) {logger.info(allExeption);}
+        }
+            if (allExeption.length()>0) {logger.info(allExeption);}
             Assertions.assertTrue(allExeption.length()==0,"info is not correct");
 
 
@@ -66,4 +69,4 @@ public class CourcePage extends AbsPage{
 
     }
 
-}
+

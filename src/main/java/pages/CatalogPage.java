@@ -15,7 +15,7 @@ import java.time.Duration;
 import java.util.List;
 
 public class CatalogPage extends AbsPage {
-//    private static final Logger logger = (Logger) LogManager.getLogger(CatalogPage.class);
+    private static final Logger logger = (Logger) LogManager.getLogger(CatalogPage.class);
     public CatalogPage (WebDriver driver) {
         super(driver);
     }
