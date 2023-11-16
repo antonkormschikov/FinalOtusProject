@@ -35,9 +35,9 @@ public class TestingCoursesCatalog_Test {
             driver.quit();
         }
     }
-    @Disabled
+
     @Test
-    public void countTestingCoursesTest(){
+    public void countTestingCoursesTest(){logger.info("----Тест проверка количества курсов---");
         CatalogPage catalogPage = new CatalogPage(driver);
         catalogPage.openPage("/catalog/courses?categories=testing");
        // catalogPage.openTestingCoursePage();
@@ -50,24 +50,24 @@ public class TestingCoursesCatalog_Test {
         catalogPage.openPage("/catalog/courses?categories=testing");
         new CourcePage(driver).assertCorrectCoursesDataInfo();
     }
-    @Disabled
+
     @Test
     public void calendarDateValidateTest(){ logger.info("----Тест Валидация дат предстоящих событий---");
         CalendarPage calendarPage = new CalendarPage(driver);
-        calendarPage.openPage("/");logger.info("1. Переход на главную страницу");
-        calendarPage.goToCalendar();logger.info("2. Открытие страницы Календарь мероприятий");
-        calendarPage.scrollPageToEnd();logger.info("3. Загрузка всех мероприятий");
-        calendarPage.assertFutureEventDate();logger.info("4. Валидация дат предстоящих событий");
+        calendarPage.openPage("/");
+        calendarPage.goToCalendar();
+        calendarPage.scrollPageToEnd();
+        calendarPage.assertFutureEventDate();
     }
-    @Disabled
+
     @Test
     public void checkTypeEvent(){logger.info("----Тест Валидация типа предстоящих событий(тип Открытый вебинар)---");
         CalendarPage calendarPage = new CalendarPage(driver);
-        calendarPage.openPage("/");logger.info("----Тест Валидация дат предстоящих событий---");
-        calendarPage.goToCalendar();logger.info("----Тест Валидация дат предстоящих событий---");
-        calendarPage.changeEventType();logger.info("----Тест Валидация дат предстоящих событий---");
-        calendarPage.scrollPageToEnd();logger.info("----Тест Валидация дат предстоящих событий---");
-        calendarPage.assertEventType("Открытый вебинар");logger.info("----Тест Валидация дат предстоящих событий---");
+        calendarPage.openPage("/");
+        calendarPage.goToCalendar();
+        calendarPage.changeEventType();
+        calendarPage.scrollPageToEnd();
+        calendarPage.assertEventType("Открытый вебинар");
     }
 
 

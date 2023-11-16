@@ -24,6 +24,7 @@ public class AbsPage extends AbsPageObject {
     }
 
     public void scrollPageToEnd() {
+        logger.info("Загрузка всех мероприятий");
         List<WebElement> elements = driver.findElements(By.xpath("//a[@class='dod_new-event']"));
         int countElementsBefore=elements.size();
         int countElementsAfter=35;

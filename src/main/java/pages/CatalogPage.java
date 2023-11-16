@@ -34,7 +34,7 @@ public class CatalogPage extends AbsPage {
     }
 
     public void assertCountCourses(int countCourses){
-
+        logger.info(String.format("Количество курсов должно быть %d",countCourses));
         Assertions.assertEquals(countCourses,getCourses().size());
     }
 

@@ -27,6 +27,7 @@ public class CalendarPage extends AbsPage{
     private final String formatLocatorTemplate="//a[@href='%s' and @class='dod_new-event']//div[@class='dod_new-type__text']";
 
     public void goToCalendar(){
+        logger.info("Открытие страницы Календарь мероприятий");
         WebElement popUpEdu = driver.findElement(By.xpath("//div[span[@title='Обучение']]"));
         waiters.waitElementVisible(popUpEdu);
         new Actions(driver).moveToElement(popUpEdu).build().perform();
@@ -55,6 +56,7 @@ public class CalendarPage extends AbsPage{
     }
 
     public void assertFutureEventDate(){
+        logger.info("Валидация дат предстоящих событий");
         List<WebElement> elements = driver.findElements(By.xpath(eventLocator));
         String link="";
         String dateElement="";
@@ -65,6 +67,7 @@ public class CalendarPage extends AbsPage{
                     (String.format(dateLocatorTemplate,link))).getText();
             LocalDate localDate;
             try{
+
                 localDate=convertDate(dateElement);
                 if (!(LocalDate.now().isEqual(convertDate(dateElement))
                         ||LocalDate.now().isBefore(convertDate(dateElement)))){
@@ -72,10 +75,9 @@ public class CalendarPage extends AbsPage{
                 }
             } catch (Exception e){
                 allExeption+='\n' +String.format("Ошибка даты %s исключение: %s",link,e.toString()) ;
+                logger.info(String.format("Ошибка даты %s исключение: %s",link,e.getMessage()));
             }
-            if (allExeption.length()>0) {
-                logger.info(allExeption);
-            }
+            //if (allExeption.length()>0) {                logger.info(allExeption);            }
 
             Assertions.assertTrue(allExeption.length()==0,"Date should be after or equal now");
 
@@ -84,6 +86,7 @@ public class CalendarPage extends AbsPage{
     }
 
     public void changeEventType(){
+        logger.info("Изменение типа мероприятия");
         driver.findElement(By.xpath("//div[span[contains(text(),'Ближайшие мероприятия')]]/div")).click();
         WebElement element = driver.findElement(By.xpath("//div[span[contains(text(),'Ближайшие мероприятия')]]/div/div/a[@title='Открытый вебинар']"));
         waiters.waitElementVisible(element);
@@ -92,6 +95,7 @@ public class CalendarPage extends AbsPage{
     }
 
     public void assertEventType(String assertParam){
+        logger.info("Валидация типа мероприятия");
         List<WebElement> elements = driver.findElements(By.xpath(eventLocator));
         String link="";
         String formatElement="";
