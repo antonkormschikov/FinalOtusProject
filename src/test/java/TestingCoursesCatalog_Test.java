@@ -35,15 +35,15 @@ public class TestingCoursesCatalog_Test {
             driver.quit();
         }
     }
-    @Disabled
+
     @Test
-    public void CountTestingCoursesTest(){
+    public void countTestingCoursesTest(){
         CatalogPage catalogPage = new CatalogPage(driver);
         catalogPage.openPage("/catalog/courses?categories=testing");
        // catalogPage.openTestingCoursePage();
         catalogPage.assertCountCourses(10);
     }
-    @Disabled
+
     @Test
     public void courseCardTest(){
         CatalogPage catalogPage = new CatalogPage(driver);
@@ -51,17 +51,24 @@ public class TestingCoursesCatalog_Test {
         new CourcePage(driver).assertCorrectCoursesDataInfo();
     }
 
+
     @Test
-    public void CalendarDateValidateTest(){
+    public void calendarDateValidateTest(){
         CalendarPage calendarPage = new CalendarPage(driver);
         calendarPage.openPage("/");
         calendarPage.goToCalendar();
         calendarPage.scrollPageToEnd();
         calendarPage.assertFutureEventDate();
+    }
 
-        Assertions.assertTrue(true);
-
-
+    @Test
+    public void checkTypeEvent(){
+        CalendarPage calendarPage = new CalendarPage(driver);
+        calendarPage.openPage("/");
+        calendarPage.goToCalendar();
+        calendarPage.changeEventType();
+        calendarPage.scrollPageToEnd();
+        calendarPage.assertEventType();
     }
 
 

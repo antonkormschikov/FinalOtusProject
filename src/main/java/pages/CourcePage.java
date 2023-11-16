@@ -58,7 +58,7 @@ public class CourcePage extends AbsPage{
                 System.out.println(String.format("Ошибка на странице %d %s",i,href) + ' '+  ex.toString());
             }
           //  if (allExeption.length()>0) {logger.info(allExeption);}
-            Assertions.assertFalse(allExeption.length()>0,"info is correct");
+            Assertions.assertTrue(allExeption.length()==0,"info is not correct");
 
 
 

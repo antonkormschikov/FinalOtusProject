@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import pageobject.AbsPageObject;
 
 import java.time.Duration;
+import java.util.List;
 
 public class AbsPage extends AbsPageObject {
     public AbsPage(WebDriver driver) {
@@ -20,20 +21,21 @@ public class AbsPage extends AbsPageObject {
     }
 
     public void scrollPageToEnd() {
-       /* int windowHeightBefore = driver.manage().window().getPosition().y;
-        int windowHeightAfter = windowHeightBefore + 1;*/
-        int i = 1500;
+        List<WebElement> elements = driver.findElements(By.xpath("//a[@class='dod_new-event']"));
+        int countElementsBefore=elements.size();
+        int countElementsAfter=35;
+        int pixels = 5000;
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript(String.format("window.scrollBy(0,%d)", i));
-        WebElement element = driver.findElement(By.xpath("//div[@class='dod_new-loader-wrapper js-dod_new-loader-wrapper']"));
-//div[@class='dod_new-loader']
 
-        //WebDriverWait webDriverWait = new WebDriverWait(driver,Duration.ofSeconds(5));
-
-        while (!element.isDisplayed()){
-
-                  js.executeScript(String.format("window.scrollBy(0,%d)", i));
-
+        while (countElementsBefore<countElementsAfter){
+        countElementsBefore=countElementsAfter;
+                  js.executeScript(String.format("window.scrollBy(0,%d)", pixels));
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            countElementsAfter=driver.findElements(By.xpath("//a[@class='dod_new-event']")).size();
         }
         }
 }
