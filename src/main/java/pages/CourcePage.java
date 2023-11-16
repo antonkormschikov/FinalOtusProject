@@ -17,7 +17,7 @@ import pages.CatalogPage;
 
 public class CourcePage extends AbsPage{
     public CourcePage (WebDriver driver){super(driver);}
-    private static final  Logger logger = (Logger) LogManager.getLogger(CourcePage.class);
+ //   private static final  Logger logger = (Logger) LogManager.getLogger(CourcePage.class);
     private final String sourceNameLocator = "//h1";
     private final String courseDescriptionLocator="//h1/following::div[1]";
     private final String courseDuration="//main/div/section/div/div/div[3]/p";

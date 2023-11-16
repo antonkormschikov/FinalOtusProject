@@ -8,6 +8,7 @@ import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import sun.security.mscapi.CPublicKey;
 
 import java.text.DateFormat;
@@ -20,7 +21,7 @@ import java.util.List;
 
 public class CalendarPage extends AbsPage{
     public CalendarPage (WebDriver driver) {super(driver);}
-    private static final Logger logger = (Logger) LogManager.getLogger(CalendarPage.class);
+ //   private static final Logger logger = (Logger) LogManager.getLogger(CalendarPage.class);
     private final String eventLocator="//a[@class='dod_new-event']";
     private final String dateLocatorTemplate="//a[@href='%s' and @class='dod_new-event']/div/div[@class='dod_new-event__bottom']/div/span[1]/span[@class='dod_new-event__date-text']";
     private final String formatLocatorTemplate="//a[@href='%s' and @class='dod_new-event']//div[@class='dod_new-type__text']";
@@ -57,7 +58,6 @@ public class CalendarPage extends AbsPage{
         List<WebElement> elements = driver.findElements(By.xpath(eventLocator));
         String link="";
         String dateElement="";
-        System.out.println(elements.size());
         String allExeption="";
         for (WebElement element : elements) {
             link=element.getAttribute("href");
@@ -85,10 +85,13 @@ public class CalendarPage extends AbsPage{
 
     public void changeEventType(){
         driver.findElement(By.xpath("//div[span[contains(text(),'Ближайшие мероприятия')]]/div")).click();
-        driver.findElement(By.xpath("//div[span[contains(text(),'Ближайшие мероприятия')]]/div/div/a[@title='Открытый вебинар']")).click();
+        WebElement element = driver.findElement(By.xpath("//div[span[contains(text(),'Ближайшие мероприятия')]]/div/div/a[@title='Открытый вебинар']"));
+        waiters.waitElementVisible(element);
+        element.click();
+
     }
 
-    public void assertEventType(){
+    public void assertEventType(String assertParam){
         List<WebElement> elements = driver.findElements(By.xpath(eventLocator));
         String link="";
         String formatElement="";
@@ -99,7 +102,7 @@ public class CalendarPage extends AbsPage{
             try{
             formatElement=driver.findElement(By.xpath
                     (String.format(formatLocatorTemplate,link))).getText();
-            if (!formatElement.equals("Открытый вебинар")) {
+            if (!formatElement.equals(assertParam)) {
                 allExeption += '\n' + String.format("Ошибка формата события %s", link);
             }
             } catch (Exception e){

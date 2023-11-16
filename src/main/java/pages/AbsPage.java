@@ -1,6 +1,8 @@
 package pages;
 
 import com.sun.org.apache.xpath.internal.operations.Bool;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -15,7 +17,7 @@ public class AbsPage extends AbsPageObject {
     }
 
     private final String BASE_URL = System.getProperty("base.url", "https://otus.ru");
-
+    public static final Logger logger = (Logger) LogManager.getLogger();
     public void openPage(String path) {
         driver.get(BASE_URL + path);
     }

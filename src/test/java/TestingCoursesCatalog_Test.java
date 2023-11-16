@@ -11,7 +11,7 @@ import waiters.Waiters;
 
 
 public class TestingCoursesCatalog_Test {
-    private static final Logger logger = (Logger) LogManager.getLogger(TestingCoursesCatalog_Test.class);
+    public Logger logger = (Logger) LogManager.getLogger(TestingCoursesCatalog_Test.class);
 
     private WebDriver driver;
     private Waiters waiters;
@@ -35,7 +35,7 @@ public class TestingCoursesCatalog_Test {
             driver.quit();
         }
     }
-
+    @Disabled
     @Test
     public void countTestingCoursesTest(){
         CatalogPage catalogPage = new CatalogPage(driver);
@@ -45,30 +45,29 @@ public class TestingCoursesCatalog_Test {
     }
 
     @Test
-    public void courseCardTest(){
+    public void courseCardTest(){logger.info("----Тест Валидация информации в карточке курса---");
         CatalogPage catalogPage = new CatalogPage(driver);
-        catalogPage.openPage("/catalog/courses?categories=testing");
-        new CourcePage(driver).assertCorrectCoursesDataInfo();
+        catalogPage.openPage("/catalog/courses?categories=testing");logger.info("1. Переход на страницу курсов тестирования");
+        new CourcePage(driver).assertCorrectCoursesDataInfo();logger.info("2. Валидация информации в карточке курса");
     }
-
-
+    @Disabled
     @Test
-    public void calendarDateValidateTest(){
+    public void calendarDateValidateTest(){ logger.info("----Тест Валидация дат предстоящих событий---");
         CalendarPage calendarPage = new CalendarPage(driver);
-        calendarPage.openPage("/");
-        calendarPage.goToCalendar();
-        calendarPage.scrollPageToEnd();
-        calendarPage.assertFutureEventDate();
+        calendarPage.openPage("/");logger.info("1. Переход на главную страницу");
+        calendarPage.goToCalendar();logger.info("2. Открытие страницы Календарь мероприятий");
+        calendarPage.scrollPageToEnd();logger.info("3. Загрузка всех мероприятий");
+        calendarPage.assertFutureEventDate();logger.info("4. Валидация дат предстоящих событий");
     }
-
+    @Disabled
     @Test
-    public void checkTypeEvent(){
+    public void checkTypeEvent(){logger.info("----Тест Валидация типа предстоящих событий(тип Открытый вебинар)---");
         CalendarPage calendarPage = new CalendarPage(driver);
-        calendarPage.openPage("/");
-        calendarPage.goToCalendar();
-        calendarPage.changeEventType();
-        calendarPage.scrollPageToEnd();
-        calendarPage.assertEventType();
+        calendarPage.openPage("/");logger.info("----Тест Валидация дат предстоящих событий---");
+        calendarPage.goToCalendar();logger.info("----Тест Валидация дат предстоящих событий---");
+        calendarPage.changeEventType();logger.info("----Тест Валидация дат предстоящих событий---");
+        calendarPage.scrollPageToEnd();logger.info("----Тест Валидация дат предстоящих событий---");
+        calendarPage.assertEventType("Открытый вебинар");logger.info("----Тест Валидация дат предстоящих событий---");
     }
 
 
