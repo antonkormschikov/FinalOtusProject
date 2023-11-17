@@ -40,7 +40,6 @@ public class TestingCoursesCatalog_Test {
     public void countTestingCoursesTest(){logger.info("----Тест проверка количества курсов---");
         CatalogPage catalogPage = new CatalogPage(driver);
         catalogPage.openPage("/catalog/courses?categories=testing");
-       // catalogPage.openTestingCoursePage();
         catalogPage.assertCountCourses(10);
     }
 
